@@ -8,13 +8,12 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'react-rails', github: 'reactjs/react-rails'
+gem 'react_on_rails', '~> 5'
 gem 'devise'
 gem 'slim-rails'
 gem 'carrierwave'
 gem 'faraday'
 gem 'faraday_middleware'
-gem "browserify-rails"
 
 group :development, :test do
   gem 'rspec-rails'
