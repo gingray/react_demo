@@ -28,7 +28,6 @@ export default class UrlForm extends React.Component {
   }
 
   onChange(state) {
-    console.log(SeoToolStore.getState());
     this.setState(SeoToolStore.getState());
   }
 

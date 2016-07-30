@@ -65,6 +65,7 @@ module.exports = {
       // bootstrap js
       { test: require.resolve('jquery'), loader: 'expose?jQuery' },
       { test: require.resolve('jquery'), loader: 'expose?$' },
+      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
       { test: /\.css$/, loader: ExtractStyles.extract('css-loader!postcss-loader') },
       { test: /\.(sass|scss)$/, loader: ExtractStyles.extract("file?name=[path][name].css!sass-loader") },
       { test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url?limit=10000" },
