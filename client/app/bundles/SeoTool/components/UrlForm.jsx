@@ -1,16 +1,35 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import Theme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import SeoToolStore from '../stores/SeoToolStore'
+import SeoToolActions from '../actions/SeoToolActions';
+
 
 export default class UrlForm extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    _.bindAll(this, 'handleChange');
+    console.log(props);
+    this.state = SeoToolStore.getState();
+    this.onTextInput = this.onTextInput.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onBtnClick = this.onBtnClick.bind(this);
+  }
+
+  componentDidMount() {
+    SeoToolStore.listen(this.onChange);
+  }
+
+  componentWillUnmount() {
+    SeoToolStore.unlisten(this.onChange);
+  }
+
+  onChange(state) {
+    console.log(SeoToolStore.getState());
+    this.setState(SeoToolStore.getState());
   }
 
   static childContextTypes = {
@@ -22,18 +41,22 @@ export default class UrlForm extends React.Component {
     return { muiTheme: muiTheme };
   }
 
-  handleChange(e) {
-    const name = e.target.value;
-    this.props.updateName(name);
+  onTextInput(event) {
+    SeoToolActions.validateUrl(event.target.value);
+  }
+
+  onBtnClick() {
+    SeoToolActions.fetchData(this.props.post_url, this.state.url);
   }
 
   render() {
-    const { name } = this.props;
     return (
-      <div className="container">
-        <TextField hintText="Input url" fullWidth={true}  />
-        <div>
-          <FlatButton label="Fetch data" primary={true}/>
+      <div className="row">
+        <div className="col-md-8">
+          <TextField hintText={'Enter your site'} fullWidth={true} onChange={this.onTextInput}  />
+        </div>
+        <div className="col-md-4">
+          <FlatButton label="Check Site" primary={true} onClick={this.onBtnClick}/>
         </div>
       </div>
     );

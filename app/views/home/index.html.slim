@@ -1,5 +1,8 @@
+= react_component("AppBar", props: { auth_url: "auth_url" }, prerender: false)
 .container
   .row
     .col-md-8.col-md-offset-2
-      = react_component("SeoTool", props: @hello_world_props, prerender: false)
-
+      = react_component("UrlForm", props: { post_url: "#{fetch_data_path}"}, prerender: false)
+  .row
+    .col-md-12
+      = react_component("DataTab", prerender: false)

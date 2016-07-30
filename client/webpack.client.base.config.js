@@ -5,6 +5,8 @@ const path = require('path');
 
 const devBuild = process.env.NODE_ENV !== 'production';
 const nodeEnv = devBuild ? 'development' : 'production';
+const ExtractStyles = require("extract-text-webpack-plugin");
+
 
 module.exports = {
 
@@ -22,6 +24,7 @@ module.exports = {
     // webpack.rails.config
     app: [
       './app/bundles/SeoTool/startup/clientRegistration',
+      'bootstrap-loader/extractStyles'
     ],
   },
   resolve: {
@@ -52,6 +55,8 @@ module.exports = {
       // In other words, we only put what's in the vendor entry definition in vendor-bundle.js
       minChunks: Infinity,
     }),
+    new ExtractStyles("../stylesheets/style.css", { allChunks: true }),
+
   ],
   module: {
     loaders: [
@@ -60,6 +65,10 @@ module.exports = {
       // bootstrap js
       { test: require.resolve('jquery'), loader: 'expose?jQuery' },
       { test: require.resolve('jquery'), loader: 'expose?$' },
+      { test: /\.css$/, loader: ExtractStyles.extract('css-loader!postcss-loader') },
+      { test: /\.(sass|scss)$/, loader: ExtractStyles.extract("file?name=[path][name].css!sass-loader") },
+      { test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url?limit=10000" },
+      { test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/, loader: 'file' }
     ],
   },
 };
