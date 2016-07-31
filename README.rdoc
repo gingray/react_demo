@@ -1,28 +1,22 @@
-== README
+=== RUN INSTRUCTION
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```
+bundle && npm install
 
-Things you may want to cover:
+```
 
-* Ruby version
+maybe you also need to do
 
-* System dependencies
+```
+cd client
+npm install
+```
 
-* Configuration
+then run 
+```
+rake db:create
+rake db:migrate
+npm run rails-server
+```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+last command run both rails server and webpack server
