@@ -14,6 +14,7 @@ gem 'slim-rails'
 gem 'carrierwave'
 gem 'faraday'
 gem 'faraday_middleware'
+gem 'omniauth-shopify-oauth2'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -21,6 +22,7 @@ group :development, :test do
   gem 'byebug'
   gem 'vcr'
   gem 'pry-rails'
+  gem 'thin'
 end
 
 group :test do
