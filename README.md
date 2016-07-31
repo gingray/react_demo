@@ -13,6 +13,7 @@ npm install
 ```
 
 then run 
+
 ```
 rake db:create
 rake db:migrate
